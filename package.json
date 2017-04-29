@@ -21,6 +21,12 @@
     "jade": "^1.11.0"
   },
   "devDependencies": {
-    "bower": "^1.8.0"
+    "body-parser": "^1.17.1",
+    "bower": "^1.8.0",
+    "cookie-parser": "^1.4.3",
+    "express-session": "^1.15.2",
+    "morgan": "^1.8.1",
+    "passport": "^0.3.2",
+    "stylus": "^0.54.5"
   }
 }
