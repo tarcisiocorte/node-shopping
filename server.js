@@ -34,6 +34,7 @@ app.get('*', function(req, res){
     res.render('index');
 });
 
+// it will call the mockup page
 app.get('mockup', function(req, res){
     res.render('mockup');
 });
@@ -41,4 +42,4 @@ app.get('mockup', function(req, res){
 var port = 3030;
 app.listen(port);
 
-console.log('server is running');
+console.log('server is running: listenning the Port: ' + port);
