@@ -34,6 +34,10 @@ app.get('*', function(req, res){
     res.render('index');
 });
 
+app.get('mockup', function(req, res){
+    res.render('mockup');
+});
+
 var port = 3030;
 app.listen(port);
 
