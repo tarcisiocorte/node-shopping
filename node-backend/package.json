@@ -18,6 +18,7 @@
   "homepage": "https://github.com/tarcisiocorte/node-shopping#readme",
   "dependencies": {
     "express": "^4.15.2",
+    "express-load": "^1.1.15",
     "jade": "^1.11.0"
   },
   "devDependencies": {
@@ -25,9 +26,11 @@
     "bower": "^1.8.0",
     "cookie-parser": "^1.4.3",
     "express-session": "^1.15.2",
+    "express-validator": "^3.2.0",
     "mocha": "^3.3.0",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
-    "rename": "^1.0.4"
+    "rename": "^1.0.4",
+    "supertest": "^3.0.0"
   }
 }
