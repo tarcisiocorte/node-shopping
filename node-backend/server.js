@@ -1,45 +1,18 @@
-var express = require('express'),
-    stylus = require('stylus'),
-    logger = require('morgan'),
-    bodyParser = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    session = require('express-session'),
-    passport = require('passport');
+var express = require('express');
 
-
-var env = process.env.NODE_ENV = process.NODE_ENV || 'development';
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 var app = express();
 
-function compile(str,path){
-    return stylus(str).set('filename', path);
-}
+var config = require('./server/config/config')[env];
 
-app.set('views', __dirname + '/server/views');
+require('./server/config/express')(app, config);
 
-app.set('view engine','jade');
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());
+require('./server/config/mongoose')(config);
 
-app.set(stylus.middleware(
-    {
-        src: __dirname + '/public',
-        compile: compile
-    }
-));
+require('./server/config/passport')();
 
-app.use(express.static(__dirname + '/public'));
+require('./server/config/routes')(app);
 
-app.get('*', function(req, res){
-    res.render('index');
-});
-
-// it will call the mockup page
-app.get('mockup', function(req, res){
-    res.render('mockup');
-});
-
-var port = 3030;
-app.listen(port);
-
-console.log('server is running: listenning the Port: ' + port);
+app.listen(config.port);
+console.log('Listening on port ' + config.port + '...');
