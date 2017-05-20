@@ -30,10 +30,11 @@
   "devDependencies": {
     "body-parser": "^1.17.1",
     "bower": "^1.8.0",
+    "chai": "^3.5.0",
     "cookie-parser": "^1.4.3",
     "express-session": "^1.15.2",
     "express-validator": "^3.2.0",
-    "mocha": "^3.3.0",
+    "mocha": "^3.4.1",
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
     "rename": "^1.0.4",
