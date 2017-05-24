@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test-integration": "mocha --opts test/integration/mocha.opts test/integration/*.js",
+    "qualquer_coisa": "mocha --opts test/integration/mocha.opts test/integration/*.js"
   },
   "repository": {
     "type": "git",
@@ -25,7 +27,9 @@
     "express-load": "^1.1.15",
     "jade": "^1.11.0",
     "mongoose": "^4.9.10",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "sequelize": "^3.30.4",
+    "sqlite3": "^3.1.8"
   },
   "devDependencies": {
     "body-parser": "^1.17.1",
