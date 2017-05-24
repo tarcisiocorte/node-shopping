@@ -26,5 +26,20 @@ describe('Routes Books', () => {
                 done(err);
             });
         });
-    });        
+    });
+
+    describe('Route GET /books/{id}', () => {
+        if('should return a book', done =>{
+            request
+            .get('/books/1')
+            .end((err, res) =>{
+
+                expect(res.body[0].id).to.be.eql(defaultBooks.id);
+                expect(res.body[0].name).to.be.eql(defaultBooks.name);
+                
+                done(err);
+            });
+        });
+    });
+
 });
