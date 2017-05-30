@@ -8,8 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "test-integration": "mocha --opts test/integration/mocha.opts test/integration/*.js",
     "lint": "eslint '**/*.js'",
-    "lint:fix":"eslint '**/*.js' --fix",
-    "qualquer_coisa": "mocha --opts test/integration/mocha.opts test/integration/*.js"
+    "lint:fix": "eslint '**/*.js' --fix"
   },
   "repository": {
     "type": "git",

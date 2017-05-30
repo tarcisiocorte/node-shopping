@@ -1,6 +1,5 @@
 describe('Routes Books', () => {
-    const Books = app.datasource.models.Books,
-     defaultBooks = {
+    const defaultBooks = {
         id:1,
         name: 'Default Book'
     };
