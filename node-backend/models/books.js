@@ -1,5 +1,5 @@
 export default (sequelize, DataType) => {
-    const Books = sequelize.define('Books',{
+    return  sequelize.define('Books',{
         id:{
             type: DataType.INTEGER,
             primaryKey: true,
@@ -13,5 +13,4 @@ export default (sequelize, DataType) => {
             }
         }
     });
-    return Books;
 }
