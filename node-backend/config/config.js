@@ -1,10 +1,10 @@
 export default {
-  database: 'books',
+  database: 'shopping',
   username: '',
   password: '',
   params: {
     dialect: 'sqlite',
-    storage: 'books.sqlite',
+    storage: 'shopping.sqlite',
     define: {
       underscored: true,
     },

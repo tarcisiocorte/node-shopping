@@ -17,13 +17,13 @@ describe('Routes Books', () => {
   describe('Route GET /books', () => {
     it('should return a list of books', (done) => {
       request
-            .get('/books')
-            .end((err, res) => {
-              expect(res.body[0].id).to.be.eql(defaultBooks.id);
-              expect(res.body[0].name).to.be.eql(defaultBooks.name);
+          .get('/books')
+          .end((err, res) => {
+            expect(res.body[0].id).to.be.eql(defaultBooks.id);
+            expect(res.body[0].name).to.be.eql(defaultBooks.name);
 
-              done(err);
-            });
+            done(err);
+          });
     });
   });
 
