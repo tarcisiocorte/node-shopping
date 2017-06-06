@@ -21,6 +21,9 @@ describe('Routes Products', () => {
             request
                 .get('/products')
                 .end((err, res)=>{
+                  
+                  console.log('produto zzzzzz: ' + res.body);
+
                     expect(res.body[0].id).to.be.eql(defaultProducts.id);
                     expect(res.body[0].name).to.be.eql(defaultProducts.name);
                     //expect(res.body[0].price).to.be.eql(defaultProducts.price);                        
