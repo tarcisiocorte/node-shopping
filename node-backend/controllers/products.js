@@ -18,7 +18,17 @@ class ProductsController{
     return this.Products.findAll({})
       .then(result => defaultResponse(result))
       .catch(error => errorResponse(error.message));
+    }
+
+  getById(id) {
+      return this.Products.findOne({
+        where: id,
+      })
+      .then(result => defaultResponse(result))
+      .catch(error => errorResponse(error.message));
   }
+
+
 }
 
 

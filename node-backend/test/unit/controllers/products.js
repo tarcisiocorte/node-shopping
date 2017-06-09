@@ -23,6 +23,27 @@ describe('Controller: Products',() => {
         });
     });
 
+    describe('Get one Product: getById()', () =>{
+        it('should return a Product', () =>{
+            const Products = {
+                findOne: td.function(),
+            };
+
+            const expectedResponse = [{
+            id: 1,
+            name: 'Test Product',
+            price: 174.84,
+            created_at: '2016-08-06T23:55:36.692Z',
+            updated_at: '2016-08-06T23:55:36.692Z',}];
+
+            td.when(Products.findOne({ where: { id: 1 } })).thenResolve(expectedResponse);
+
+            const productsController = new ProductsController(Products);
+            return productsController.getById({ id: 1 })
+                .then(response => expect(response.data).to.be.eql(expectedResponse));
+
+        });
+    });
 
 
 
