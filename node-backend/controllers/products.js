@@ -28,6 +28,12 @@ class ProductsController{
       .catch(error => errorResponse(error.message));
   }
 
+  create(data) {
+    return this.Products.create(data)
+      .then(result => defaultResponse(result, HttpStatus.CREATED))
+      .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY));
+  }
+
 
 }
 
