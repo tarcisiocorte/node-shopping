@@ -34,8 +34,22 @@ class ProductsController{
       .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY));
   }
 
+  update(data, params) {
+    return this.Products.update(data, {
+      where: params,
+    })
+    .then(result => defaultResponse(result))
+    .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY));
+  }
 
+  delete(params) {
+    return this.Products.destroy({
+      where: params,
+    })
+    .then(result => defaultResponse(result, HttpStatus.NO_CONTENT))
+    .catch(error => errorResponse(error.message, HttpStatus.UNPROCESSABLE_ENTITY));
+  }
+  
 }
-
 
 export default ProductsController;
