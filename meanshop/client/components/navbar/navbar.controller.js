@@ -2,9 +2,13 @@
 
 angular.module('meanshopApp')
   .controller('NavbarCtrl', function ($scope, Auth) {
+    /* client/components/navbar/navbar.controller.js *excerpt */
     $scope.menu = [{
       'title': 'Home',
       'state': 'main'
+    }, {
+      'title': 'Products',
+      'state': 'products'
     }];
 
     $scope.isCollapsed = true;
