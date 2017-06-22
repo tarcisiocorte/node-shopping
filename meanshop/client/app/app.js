@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('meanshopApp', [
+angular.module('meanstackApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
@@ -8,7 +8,7 @@ angular.module('meanshopApp', [
   'ui.router',
   'ui.bootstrap'
 ])
-  .config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');
 
@@ -16,24 +16,23 @@ angular.module('meanshopApp', [
     $httpProvider.interceptors.push('authInterceptor');
   })
 
-  .factory('authInterceptor', function($rootScope, $q, $cookies, $injector) {
-    var state;
+  .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
     return {
       // Add authorization token to headers
-      request: function(config) {
+      request: function (config) {
         config.headers = config.headers || {};
-        if ($cookies.get('token')) {
-          config.headers.Authorization = 'Bearer ' + $cookies.get('token');
+        if ($cookieStore.get('token')) {
+          config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
         }
         return config;
       },
 
       // Intercept 401s and redirect you to login
       responseError: function(response) {
-        if (response.status === 401) {
-          (state || (state = $injector.get('$state'))).go('login');
+        if(response.status === 401) {
+          $location.path('/login');
           // remove any stale tokens
-          $cookies.remove('token');
+          $cookieStore.remove('token');
           return $q.reject(response);
         }
         else {
@@ -43,16 +42,13 @@ angular.module('meanshopApp', [
     };
   })
 
-  .run(function($rootScope, $state, Auth) {
-    // Redirect to login if route requires auth and the user is not logged in
-    $rootScope.$on('$stateChangeStart', function(event, next) {
-      if (next.authenticate) {
-        Auth.isLoggedIn(function(loggedIn) {
-          if (!loggedIn) {
-            event.preventDefault();
-            $state.go('login');
-          }
-        });
-      }
+  .run(function ($rootScope, $location, Auth) {
+    // Redirect to login if route requires auth and you're not logged in
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+      Auth.isLoggedInAsync(function(loggedIn) {
+        if (next.authenticate && !loggedIn) {
+          $location.path('/login');
+        }
+      });
     });
   });

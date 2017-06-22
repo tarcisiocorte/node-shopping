@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('meanshopApp')
+angular.module('meanstackApp')
   .factory('Modal', function ($rootScope, $modal) {
     /**
      * Opens a modal
@@ -39,7 +39,7 @@ angular.module('meanshopApp')
           /**
            * Open a delete confirmation modal
            * @param  {String} name   - name or info to show on modal
-           * @param  {All}           - any additional args are passed straight to del callback
+           * @param  {All}           - any additional args are passed staight to del callback
            */
           return function() {
             var args = Array.prototype.slice.call(arguments),

@@ -3,7 +3,7 @@
 describe('Service: products', function () {
 
   // load the service's module
-  beforeEach(module('meanshopApp'));
+  beforeEach(module('meanstackApp'));
 
   // instantiate service
   var products;
@@ -12,7 +12,7 @@ describe('Service: products', function () {
   }));
 
   it('should do something', function () {
-    expect(!!products).to.be.true;
+    expect(!!products).toBe(true);
   });
 
 });

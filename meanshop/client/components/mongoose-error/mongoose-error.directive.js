@@ -3,7 +3,7 @@
 /**
  * Removes server error when user updates input
  */
-angular.module('meanshopApp')
+angular.module('meanstackApp')
   .directive('mongooseError', function () {
     return {
       restrict: 'A',

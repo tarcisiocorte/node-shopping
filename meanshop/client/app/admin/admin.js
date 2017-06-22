@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('meanshopApp')
-  .config(function($stateProvider) {
+angular.module('meanstackApp')
+  .config(function ($stateProvider) {
     $stateProvider
       .state('admin', {
         url: '/admin',
