@@ -1,21 +1,43 @@
 'use strict';
+// @flow
 
-angular.module('meanstackApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
-    $scope.errors = {};
+type User = {
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+};
 
-    $scope.changePassword = function(form) {
-      $scope.submitted = true;
-      if(form.$valid) {
-        Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
-        .then( function() {
-          $scope.message = 'Password successfully changed.';
+export default class SettingsController {
+  user: User = {
+    oldPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  };
+  errors = {
+    other: undefined
+  };
+  message = '';
+  submitted = false;
+  Auth;
+
+  /*@ngInject*/
+  constructor(Auth) {
+    this.Auth = Auth;
+  }
+
+  changePassword(form) {
+    this.submitted = true;
+
+    if(form.$valid) {
+      this.Auth.changePassword(this.user.oldPassword, this.user.newPassword)
+        .then(() => {
+          this.message = 'Password successfully changed.';
         })
-        .catch( function() {
+        .catch(() => {
           form.password.$setValidity('mongoose', false);
-          $scope.errors.other = 'Incorrect password';
-          $scope.message = '';
+          this.errors.other = 'Incorrect password';
+          this.message = '';
         });
-      }
-		};
-  });
+    }
+  }
+}

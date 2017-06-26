@@ -1,54 +1,54 @@
 'use strict';
 
-angular.module('meanstackApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'btford.socket-io',
-  'ui.router',
-  'ui.bootstrap'
+import angular from 'angular';
+// import ngAnimate from 'angular-animate';
+import ngCookies from 'angular-cookies';
+import ngResource from 'angular-resource';
+import ngSanitize from 'angular-sanitize';
+
+import 'angular-socket-io';
+
+import uiRouter from 'angular-ui-router';
+import uiBootstrap from 'angular-ui-bootstrap';
+import 'angular-validation-match';
+
+import {
+  routeConfig
+} from './app.config';
+
+import _Auth from '../components/auth/auth.module';
+import account from './account';
+import admin from './admin';
+import navbar from '../components/navbar/navbar.component';
+import footer from '../components/footer/footer.component';
+import main from './main/main.component';
+import constants from './app.constants';
+import util from '../components/util/util.module';
+import socket from '../components/socket/socket.service';
+
+import './app.scss';
+
+angular.module('meanshopApp', [ngCookies, ngResource, ngSanitize, 'btford.socket-io', uiRouter,
+  uiBootstrap, _Auth, account, admin, 'validation.match', navbar, footer, main, constants,
+  socket, util
 ])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-    $urlRouterProvider
-      .otherwise('/');
-
-    $locationProvider.html5Mode(true);
-    $httpProvider.interceptors.push('authInterceptor');
-  })
-
-  .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
-    return {
-      // Add authorization token to headers
-      request: function (config) {
-        config.headers = config.headers || {};
-        if ($cookieStore.get('token')) {
-          config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
-        }
-        return config;
-      },
-
-      // Intercept 401s and redirect you to login
-      responseError: function(response) {
-        if(response.status === 401) {
-          $location.path('/login');
-          // remove any stale tokens
-          $cookieStore.remove('token');
-          return $q.reject(response);
-        }
-        else {
-          return $q.reject(response);
-        }
-      }
-    };
-  })
-
-  .run(function ($rootScope, $location, Auth) {
+  .config(routeConfig)
+  .run(function($rootScope, $location, Auth) {
+    'ngInject';
     // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$stateChangeStart', function (event, next) {
-      Auth.isLoggedInAsync(function(loggedIn) {
-        if (next.authenticate && !loggedIn) {
+
+    $rootScope.$on('$stateChangeStart', function(event, next) {
+      Auth.isLoggedIn(function(loggedIn) {
+        if(next.authenticate && !loggedIn) {
           $location.path('/login');
         }
       });
+    });
+  });
+
+angular.element(document)
+  .ready(() => {
+    angular.bootstrap(document, ['meanshopApp'], {
+      strictDi: true
     });
   });

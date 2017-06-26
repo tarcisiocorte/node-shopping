@@ -1,9 +1,7 @@
 'use strict';
-
-var express = require('express');
-var passport = require('passport');
-var config = require('../config/environment');
-var User = require('../api/user/user.model');
+import express from 'express';
+import config from '../config/environment';
+import User from '../api/user/user.model';
 
 // Passport Configuration
 require('./local/passport').setup(User, config);
@@ -13,9 +11,9 @@ require('./twitter/passport').setup(User, config);
 
 var router = express.Router();
 
-router.use('/local', require('./local'));
-router.use('/facebook', require('./facebook'));
-router.use('/twitter', require('./twitter'));
-router.use('/google', require('./google'));
+router.use('/local', require('./local').default);
+router.use('/facebook', require('./facebook').default);
+router.use('/twitter', require('./twitter').default);
+router.use('/google', require('./google').default);
 
-module.exports = router;
+export default router;
