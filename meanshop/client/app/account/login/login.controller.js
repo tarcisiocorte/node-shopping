@@ -1,46 +1,29 @@
 'use strict';
-// @flow
 
-type User = {
-  name: string;
-  email: string;
-  password: string;
-};
+angular.module('meanstackApp')
+  .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+    $scope.user = {};
+    $scope.errors = {};
 
-export default class LoginController {
-  user: User = {
-    name: '',
-    email: '',
-    password: ''
-  };
-  errors = {
-    login: undefined
-  };
-  submitted = false;
-  Auth;
-  $state;
+    $scope.login = function(form) {
+      $scope.submitted = true;
 
-  /*@ngInject*/
-  constructor(Auth, $state) {
-    this.Auth = Auth;
-    this.$state = $state;
-  }
-
-  login(form) {
-    this.submitted = true;
-
-    if(form.$valid) {
-      this.Auth.login({
-        email: this.user.email,
-        password: this.user.password
-      })
-        .then(() => {
-          // Logged in, redirect to home
-          this.$state.go('main');
+      if(form.$valid) {
+        Auth.login({
+          email: $scope.user.email,
+          password: $scope.user.password
         })
-        .catch(err => {
-          this.errors.login = err.message;
+        .then( function() {
+          // Logged in, redirect to home
+          $location.path('/');
+        })
+        .catch( function(err) {
+          $scope.errors.other = err.message;
         });
-    }
-  }
-}
+      }
+    };
+
+    $scope.loginOauth = function(provider) {
+      $window.location.href = '/auth/' + provider;
+    };
+  });

@@ -1,16 +1,17 @@
 'use strict';
 
-export default class AdminController {
-  users: Object[];
+angular.module('meanstackApp')
+  .controller('AdminCtrl', function ($scope, $http, Auth, User) {
 
-  /*@ngInject*/
-  constructor(User) {
     // Use the User $resource to fetch all users
-    this.users = User.query();
-  }
+    $scope.users = User.query();
 
-  delete(user) {
-    user.$remove();
-    this.users.splice(this.users.indexOf(user), 1);
-  }
-}
+    $scope.delete = function(user) {
+      User.remove({ id: user._id });
+      angular.forEach($scope.users, function(u, i) {
+        if (u === user) {
+          $scope.users.splice(i, 1);
+        }
+      });
+    };
+  });
