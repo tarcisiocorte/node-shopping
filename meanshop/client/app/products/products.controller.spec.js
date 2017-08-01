@@ -3,7 +3,7 @@
 describe('Controller: ProductsCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('meanstackApp'));
+  beforeEach(module('meanshopApp'));
 
   var ProductsCtrl, scope;
 
@@ -16,6 +16,6 @@ describe('Controller: ProductsCtrl', function () {
   }));
 
   it('should ...', function () {
-    expect(1).toEqual(1);
+    expect(1).to.equal(1);
   });
 });

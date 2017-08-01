@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('meanstackApp')
+angular.module('meanshopApp')
   .factory('User', function ($resource) {
     return $resource('/api/users/:id/:controller', {
       id: '@_id'

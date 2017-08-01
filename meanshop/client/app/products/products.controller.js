@@ -1,32 +1,34 @@
 'use strict';
 
-angular.module('meanstackApp')
-  .controller('ProductsCtrl', function ($scope, Products) {
-    $scope.products = Products.query();
+angular.module('meanshopApp')
+
+  .controller('ProductsCtrl', function ($scope, Product) {
+    $scope.products = Product.query();
   })
 
-  .controller('ProductViewCtrl', function ($scope, $state, $stateParams, Products) {
-    $scope.product = Products.get({id: $stateParams.id});
+  .controller('ProductViewCtrl', function ($scope, $state, $stateParams, Product) {
+    $scope.product = Product.get({id: $stateParams.id});
 
-    $scope.deleteProduct = function(product){
-      Products.delete(product);
+    $scope.deleteProduct = function(){
+      Product.delete($scope.product);
       $state.go('products');
-    }
+    };
   })
 
-  .controller('ProductNewCtrl', function ($scope, $state, Products) {
+  .controller('ProductNewCtrl', function ($scope, $state, Product) {
     $scope.product = {}; // create a new instance
-    $scope.addProduct = function(product){
-      Products.create($scope.product);
+    $scope.addProduct = function(){
+      Product.create($scope.product);
       $state.go('products');
-    }
+    };
   })
 
-  .controller('ProductEditCtrl', function ($scope, $state, $stateParams, Products) {
-    $scope.product = Products.get({id: $stateParams.id});
+  .controller('ProductEditCtrl', function ($scope, $state, $stateParams, Product) {
+    $scope.product = Product.get({id: $stateParams.id});
 
-    $scope.editProduct = function(product){
-      Products.update($scope.product);
+    $scope.editProduct = function(){
+      Product.update($scope.product);
       $state.go('products');
-    }
+    };
   });
+

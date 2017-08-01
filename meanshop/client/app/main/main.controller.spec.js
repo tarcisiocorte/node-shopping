@@ -1,29 +1,24 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: MainCtrl', function() {
 
   // load the controller's module
-  beforeEach(module('meanstackApp'));
-  beforeEach(module('socketMock'));
+  beforeEach(module('meanshopApp'));
 
-  var MainCtrl,
-      scope,
-      $httpBackend;
+  var MainCtrl;
+  var $scope;
+  var state;
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
-    $httpBackend = _$httpBackend_;
-    $httpBackend.expectGET('/api/things')
-      .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
-
-    scope = $rootScope.$new();
+  beforeEach(inject(function($controller, $rootScope, $state) {
+    $scope = $rootScope.$new();
+    state = $state;
     MainCtrl = $controller('MainCtrl', {
-      $scope: scope
+      $scope: $scope
     });
   }));
 
-  it('should attach a list of things to the scope', function () {
-    $httpBackend.flush();
-    expect(scope.awesomeThings.length).toBe(4);
+  it('should attach a list of products to the scope', function() {
+    expect($scope.products.length).to.equal(2);
   });
 });
